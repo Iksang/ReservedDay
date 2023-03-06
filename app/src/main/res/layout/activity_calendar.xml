@@ -9,6 +9,7 @@
         <variable
             name="viewModel"
             type="com.ikstudio.reservedday.calendar.CalendarViewModel" />
+        <import type="com.ikstudio.reservedday.calendar.StateType"/>
 
     </data>
 
@@ -66,7 +67,6 @@
 
         <EditText
             android:id="@+id/contextEditText"
-            android:text="@={viewModel.contextEditText}"
             android:layout_width="0dp"
             android:layout_height="116dp"
             android:inputType="textMultiLine"
@@ -80,13 +80,13 @@
             android:layout_marginStart="8dp"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginLeft="8dp"
-            android:visibility="@{viewModel.showContextEditText.booleanValue() ? View.VISIBLE : View.INVISIBLE, default = invisible}" />
+            android:visibility="invisible" />
 
         <TextView
             android:id="@+id/diaryContent"
-            android:text="@={viewModel.contents}"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:text="@{viewModel.contents}"
             app:layout_constraintTop_toTopOf="@+id/contextEditText"
             app:layout_constraintBottom_toBottomOf="@+id/contextEditText"
             app:layout_constraintEnd_toEndOf="parent"
@@ -95,10 +95,10 @@
             app:layout_constraintStart_toStartOf="@+id/contextEditText"
             android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
-            android:visibility="@{viewModel.showDiaryContent.booleanValue() ? View.VISIBLE : View.INVISIBLE, default = visible}" />
+            android:visibility="visible" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:onClick="@{()->viewModel.onSaveBtnClick()}"
+            android:onClick="@{()->viewModel.stateRefresh(StateType.Save)}"
             android:id="@+id/saveBtn"
             android:text="저장"
             android:layout_width="0dp"
@@ -112,10 +112,10 @@
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
-            android:visibility="@{viewModel.showSaveBtn.booleanValue() ? View.VISIBLE : View.INVISIBLE, default = invisible}" />
+            android:visibility="invisible" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:onClick="@{()->viewModel.onUpdateBtnClick()}"
+            android:onClick="@{()->viewModel.stateRefresh(StateType.Update)}"
             android:id="@+id/updateBtn"
             android:text="수정"
             android:layout_width="0dp"
@@ -128,10 +128,10 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
-            android:visibility="@{viewModel.showUpdateBtn.booleanValue() ? View.VISIBLE : View.INVISIBLE, default = invisible}" />
+            android:visibility="invisible" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:onClick="@{()->viewModel.onDeleteBtnClick()}"
+            android:onClick="@{()->viewModel.stateRefresh(StateType.Delete)}"
             android:id="@+id/deleteBtn"
             android:text="삭제"
             android:layout_width="0dp"
@@ -144,7 +144,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
-            android:visibility="@{viewModel.showDeleteBtn.booleanValue() ? View.VISIBLE : View.INVISIBLE, default = invisible}" />
+            android:visibility="invisible" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
