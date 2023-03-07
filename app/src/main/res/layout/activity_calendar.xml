@@ -63,7 +63,7 @@
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
 
         <EditText
             android:id="@+id/contextEditText"
@@ -80,7 +80,7 @@
             android:layout_marginStart="8dp"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginLeft="8dp"
-            android:visibility="invisible" />
+            android:visibility="@{(viewModel.statetype == StateType.Update || viewModel.statetype == StateType.Delete) ? View.VISIBLE : View.INVISIBLE, default = invisible}"/>
 
         <TextView
             android:id="@+id/diaryContent"
@@ -95,7 +95,7 @@
             app:layout_constraintStart_toStartOf="@+id/contextEditText"
             android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
-            android:visibility="visible" />
+            android:visibility="@{(viewModel.statetype == StateType.ShowSchedule || viewModel.statetype == StateType.Save) ? View.VISIBLE : View.INVISIBLE, default = invisible}" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:onClick="@{()->viewModel.stateRefresh(StateType.Save)}"
@@ -112,7 +112,7 @@
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
-            android:visibility="invisible" />
+            android:visibility="@{(viewModel.statetype == StateType.Update || viewModel.statetype == StateType.Delete) ? View.VISIBLE : View.INVISIBLE, default = invisible}" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:onClick="@{()->viewModel.stateRefresh(StateType.Update)}"
@@ -128,7 +128,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
-            android:visibility="invisible" />
+            android:visibility="@{(viewModel.statetype == StateType.ShowSchedule || viewModel.statetype == StateType.Save) ? View.VISIBLE : View.INVISIBLE, default = invisible}" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:onClick="@{()->viewModel.stateRefresh(StateType.Delete)}"
@@ -144,7 +144,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
-            android:visibility="invisible" />
+            android:visibility="@{(viewModel.statetype == StateType.ShowSchedule || viewModel.statetype == StateType.Save) ? View.VISIBLE : View.INVISIBLE, default = invisible}"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

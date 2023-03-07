@@ -54,40 +54,20 @@ class CalendarActivity : AppCompatActivity() {
     }
 
     fun showScheduleState(){
-        binding.contextEditText.visibility = View.INVISIBLE
-        binding.diaryContent.visibility = View.VISIBLE
-        binding.saveBtn.visibility = View.INVISIBLE
-        binding.updateBtn.visibility = View.VISIBLE
-        binding.deleteBtn.visibility = View.VISIBLE
     }
 
 
     fun setSaveBtnClick(){
         calendarViewModel.saveDiary(binding.contextEditText.text.toString() , filesDir)
-        binding.contextEditText.visibility = View.INVISIBLE
-        binding.saveBtn.visibility = View.INVISIBLE
-        binding.updateBtn.visibility = View.VISIBLE
-        binding.deleteBtn.visibility = View.VISIBLE
         calendarViewModel.contents.value = binding.contextEditText.text.toString()
-        binding.diaryContent.visibility = View.VISIBLE
     }
 
     fun onUpdateBtnClick(){
-        binding.contextEditText.visibility = View.VISIBLE
-        binding.diaryContent.visibility = View.INVISIBLE
         binding.contextEditText.setText( calendarViewModel.contents.value)
-        binding.saveBtn.visibility = View.VISIBLE
-        binding.updateBtn.visibility = View.INVISIBLE
-        binding.deleteBtn.visibility = View.INVISIBLE
     }
 
     fun onDeleteBtnClick(){
-        binding.diaryContent.visibility = View.INVISIBLE
-        binding.updateBtn.visibility = View.INVISIBLE
-        binding.deleteBtn.visibility = View.INVISIBLE
         binding.contextEditText.setText("")
-        binding.contextEditText.visibility = View.VISIBLE
-        binding.saveBtn.visibility = View.VISIBLE
         calendarViewModel.removeDiary(filesDir)
     }
 
