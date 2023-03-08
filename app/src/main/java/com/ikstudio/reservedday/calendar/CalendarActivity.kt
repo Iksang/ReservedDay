@@ -17,9 +17,6 @@ class CalendarActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_calendar)
         binding.viewModel = calendarViewModel
         binding.lifecycleOwner = this
-
-        binding.title.text = "달력 일기장"
-
         setListener()
         setObserve()
     }

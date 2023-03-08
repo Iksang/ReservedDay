@@ -6,11 +6,10 @@
 
     <data>
         <import type="android.view.View" />
+        <import type="com.ikstudio.reservedday.calendar.StateType"/>
         <variable
             name="viewModel"
             type="com.ikstudio.reservedday.calendar.CalendarViewModel" />
-        <import type="com.ikstudio.reservedday.calendar.StateType"/>
-
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -27,7 +26,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:gravity="center"
-            android:text="달력일기장"
+            android:text="달력 일기장"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textColor="#9E28B3"
             android:textSize="24sp"
