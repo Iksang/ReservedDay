@@ -5,14 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import java.io.File
 
-enum class StateType{
-    TodayInit, ShowSchedule, Update, Save, Delete
-}
-
 class CalendarViewModel : ViewModel() {
     var userID: String = "userID"
     lateinit var fname: String
     var contents = MutableLiveData("")
+    var editContents = MutableLiveData("")
     var statetype = MutableLiveData(StateType.TodayInit)
 
     fun stateRefresh(stateType: StateType){
@@ -21,6 +18,7 @@ class CalendarViewModel : ViewModel() {
 
     // 달력 내용 조회, 수정
     fun checkDay(cYear: Int, cMonth: Int, cDay: Int, fileDir: File) {
+        editContents.value = ""
         //저장할 파일 이름설정
         fname = "" + userID + cYear + "-" + (cMonth+1) + "" + "-"+ cDay + ".txt"
         println("fname = $fname")
@@ -38,9 +36,14 @@ class CalendarViewModel : ViewModel() {
         if(str!=null) contents.value = str else contents.value = ""
     }
 
+    fun updateDiary(){
+        editContents.value = contents.value
+    }
+
     // 달력 내용 제거
     @SuppressLint("WrongConstant")
     fun removeDiary(fileDir : File){
+        editContents.value=""
         try {
 //            )
             File(fileDir, fname).outputStream().buffered().use{
@@ -53,13 +56,14 @@ class CalendarViewModel : ViewModel() {
 
     // 달력 내용 추가
     @SuppressLint("WrongConstant")
-    fun saveDiary(editTextString : String, fileDir : File){
+    fun saveDiary(fileDir : File){
         try {
             File(fileDir, fname).outputStream().buffered().use{
-                it.write(editTextString.toByteArray())
+                it.write((editContents.value?:"").toByteArray())
             }
         }catch (e:Exception){
             e.printStackTrace()
         }
+        contents.value = editContents.value?:""
     }
 }
